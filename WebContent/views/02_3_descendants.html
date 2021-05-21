@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<style>
+	.wrap *{
+		border: 1px solid lightgray;
+		display: block; padding: 5px; margin: 15px;
+	}
+	
+	.type{width: 400px;}
+</style>
+</head>
+<body>
+	<h1>객체 탐색</h1>
+	<h2>순회 메소드</h2>
+	<h3>Descendants 메소드</h3>
+	<p>선택된 요소의 하위 요소를 선택할 수 있는 메소드</p>
+	<div class="wrap">
+		<div class="type">div (great-grandparent)
+			<ul>ul (grandparent)
+				<li>li (direct parent)
+				<span>span1</span>
+				</li>
+				<li>li (direct parent)
+				<span>span2</span>
+				</li>
+			</ul>
+		
+		</div>
+	
+		<div class="type">div (great-grandparent)
+			<p>p (grandparent)
+				<span>span</span>
+			</p>
+		
+		</div>
+	</div>
+	
+	
+	
+	
+		
+	
+	
+	<script>
+			$(function(){
+				// 선택된 요소의 바로 다음 자손 선택
+			 	$('.wrap').children().css({'color':'red','border':'2px solid red'});
+			 	console.log($('.wrap').children());
+			 $('.wrap').children().children().css({'color':'blue', 'border':'2px solid blue'});
+			 // 		  div  .type      ul/p
+			 // 매개변수가 있는 경우 일치하는 자손 객체 선택
+			 $('.wrap').children().children('ul').css({'color':'green','border':'2px solid green'});
+			 
+			 // 선택된 요소의 인자와 일치하는 모든 후손 리턴
+			 $('.wrap').find('span').css({'color':'pink','border':'2px solid pink'});
+			 
+			 // 실습 : span1과 span2만 주황색으로 바꾸기
+		//	 $('li').children().css({'color':'orange','border':'2px solid orange'});
+		//	 $('li').children('span').css({'color':'orange','border':'2px solid orange'});
+			 $('.wrap').
+						 children().// div .type
+						 children().// ul/p
+			 			children()// li/span
+			 			children().// span1,2
+			 			children().css({'color':'orange','border':'2px solid orange'});
+			});
+	</script>
+</body>
+</html>

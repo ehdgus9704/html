@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<style>
+	.test{
+		width: 150px; height: 50px; border: 1px solid black;
+		text-align: center; display: table-cell; vertical-align: middle;
+	}
+	
+	.outer{width: 100px; height: 50px; padding: 30px; background: powderblue;}
+	.inner{width: 100%; height: 100%; background: white;}
+	.reverse{background: black; color: white;}
+		
+		
+	
+</style>
+</head>
+<body>
+	<h1>이벤트</h1>
+	<h2>이벤트 관련 속성</h2>
+	<p>이벤트 핸들러의 매개인자로 event 객체 전달</p>
+	<button onclick="test1(event);">실행확인</button>
+	<!-- 인라인에서는 event라는 이름을 사용해야만 이벤트 객체를 넘길 수 있음 -->
+	<script>
+			function test1(e){
+				console.log(e);
+				console.log(e.target);
+				
+			}
+	</script>
+	
+	<h2>이벤트 연결 종류</h2>
+	<h3>on()와 off()</h3>
+	<p>
+		on() : 문서 객체에 이벤트 연결<br>
+		off() : on()로 연결된 이벤트 제거
+	</p>
+	<div id="onOff" class="test">기본상태</div>
+	<script>
+	//	$('onOff').css('color':'red');
+		$('#onOff').on('click', function(){
+			console.log(event);
+			console.log($(this).text());
+		});	
+		
+	//	$('onOff').css({'color':'red','background':'blue'});
+		$('#onOff').on({'mouseenter':function(){
+			$(this).css('background','beige').text('마우스가 올라갔다.');
+		}, 'mouseout':function(){
+			$(this).css('background', 'yellowgreen').text('마우스가 내려갔다');
+		}, 'click':function(){
+			$(this).css('background', 'white').text('기본상태').off('mouseenter').off('mouseout');
+		}});
+	</script>
+	
+	<h3>one()</h3>
+	<p>이벤트를 한 번만 연결할 때 사용</p>
+	<div id="eventOne" class='test'>기본상태</div>
+	<script>
+		$(function(){
+			$('#eventOne').one('click', function(){
+				alert('처음이자 마지막 이벤트');
+			});
+		});
+	</script>
+	
+	<h2>이벤트 종류</h2>
+	<h3>마우스 이벤트</h3>
+	<h4>mouseenter/mouseleave, mouseover/mouseout</h4>
+	<div class="outer" id="mouseEvent1">
+		<div class="inner"></div>
+	</div>
+	<br>
+	<div class="outer" id="mouseEvent2">
+		<div class="inner"></div>
+	</div>
+	<script>
+		$(function(){
+			// 자식 요소 접근 시도에도 이벤트 발생
+			$('#mouseEvent1').mouseover(function(){
+				console.log($(this).attr('id') + ' over');
+			}).mouseout(function(){
+				console.log($(this).attr('id') + ' out');
+			});
+			// 자식 요소 접근 시 에빈트 발생하지 않음
+			$('#mouseEvent2').mouseenter(function(){
+				console.log($(this).attr('id') + ' enter');
+			}).mouseout(function(){
+				console.log($(this).attr('id') + ' leave');
+			});
+		});
+	</script>
+	
+	<h4>hover()</h4>
+	<p>mouseenter()와 mouseleave()를 동시에 사용하는 효과를 내는 메소드</p>
+	<div id="hoverEvent" class="test">기본상태</div>
+	<script>
+		$(function(){
+			// id가 hoverEvent인 div에 마우스가 들어가면 배경은 검은색, 글자는 하얀색으로 변경
+			// 마우스가 나오면 배경은 하얀색, 글자는 검정색으로 변경
+			//$('#hoverEvent').mouseenter(function() {
+				//$(this).css({'background':'black', 'color':'white'});
+			//});
+			//$('#hoverEvent').mouseleave(function() {
+			//	$(this).css({'background':'white', 'color':'black'});
+		//	});
+	//	});
+		
+	//	$('#hoverEvent').on({'mouseenter':function(){
+			//$(this).css({'background':'black', 'color':'white'});
+		//}, 'mouseleave':function() {
+			//$(this).css({'background':'white', 'color':'black'});
+		
+		//}});
+	
+		//$('#hoverEvent').hover(function(){
+			//$(this).css({'background':'black', 'color':'white'});
+			//}, function(){
+			//	$(this).css({'background':'white', 'color':'black'});
+		//});
+		
+		$('#hoverEvent').hover(function(){
+			//$(this).css({'background':'black', 'color':'white'});
+			//$(this).addClass('reverse');
+			  $(this).toggleClass('reverse');
+			}, function(){
+			//$(this).css({'background':'white', 'color':'black'});
+			//$(this).removeClass('reverse');
+			  $(this).toggleClass('reverse');
+		});
+	});
+	
+	</script>
+	
+	<h3>키보드 이벤트</h3>
+	<h4>keydown(), keypress(), keyup()</h4>
+	<textarea id="keyEvent" cols="40" rows="5"></textarea>
+	<script>
+		$(function(){
+			$('#keyEvent').keydown(function(e){
+				console.log('keydown : ' + e.key);
+			});
+			$('#keyEvent').keypress(function(e){
+				console.log('keypress : ' + e.key);
+			});
+			$('#keyEvent').keyup(function(e){
+				console.log('keyup : ' + e.key);
+			});
+		});
+		
+	</script>
+	
+	<h4>동적으로 글자 수 세기</h4>
+	<span id="counter">0</span>/150<br>
+	<textarea id="textTest" cols="60" rows="5"></textarea>
+	<script>
+		$(function(){
+			$('#textTest').keyup(function(){
+				var input = $(this).val();
+				var inputLength = input.length;
+				$('#counter').html('<b>' + inputLength + "</b>");
+				
+				if(inputLength <= 150){
+					$('#counter').css('color', 'black');
+				}else{
+					$('#counter').css('color','red');
+					
+					
+					var piece = input.substr(0, 150);
+					$(this).val(piece);
+				}
+			});
+		});
+	</script>
+</body>
+</html>

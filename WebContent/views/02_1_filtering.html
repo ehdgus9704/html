@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+</head>
+<body>	
+	<h1>객체 탐색</h1>
+	<h2>필터링 메소드</h2>
+	<p>필터 메소드를 통해 문서 객체를 선택 할 수 있음</p>
+	<h4 class="test">test-a</h4>
+	<h4 class="test">test-b</h4>
+	<h4 class="test">test-c</h4>
+	<h4 class="test">test-d</h4>
+	<h4>test-e</h4>
+	<h4 class="test">test-f</h4>
+	
+	<script>
+		$(function(){
+	//		$('h4:even').css({'background':'tomato','color':'white'});
+			$('h4').filter(':even').css({'background':'tomato','color':'white'});
+			
+		//	$('h4:odd').css({'background':'yellowgreen','color':'white'});
+			$('h4').filter(':odd').css({'background':'yellowgreen','color':'white'});
+			
+			console.log($('h4').first());
+			$('h4').first().css('font-size', '18pt');
+			
+			$('h4').last().text();
+			console.log($('h4').last().text()); //text() : 태그 안에 들어가 있는 값 = innerText
+			$('h4').last().text($('h4').last().text() + ' : 마지막 요소');
+			
+			$('h4').eq(3).text($('h4').eq(3).text() + " : eq()로 필터링 됨");
+			
+			$('h4').not('.test').css({'background' : 'yellow', 'color':'black'});
+			
+		});
+	</script>
+
+</body>
+</html>

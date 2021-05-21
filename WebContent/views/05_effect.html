@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.6.0.min.js"></script>
+<style>
+	.menu{
+		width: 300px; height: 30px;
+		background: yellowgreen;
+		
+		border-radius: 10px;  text-aling: center;
+		border: 1px solid green; cursor: pointer;
+	}
+	
+	.contents{
+		border: 1px solid lightgray;
+		width: 300px; height: 200px; display: none;
+	}
+</style>
+</head>
+<body>
+<h1>효과</h1>
+<h2>show()와 hide()</h2>
+<button id="show">보이기</button>
+<button id="hide">숨기기</button>
+<button id="toggle">토글이</button>
+<br>	
+<img id="river" src="../images/images/river1.PNG">
+<script>
+		$(function(){
+			$('#show').click(function(){
+	//			$('#river').css('display', inline);
+				$("#river").show();
+			});
+			$('#hide').click(function(){
+	//			$('#river').css('display', none);
+				$("#river").hide(10);
+			});
+			
+			// 토글이를 눌렀을 때 사진이 보이면 숨기고, 사진이 안보이면 보이게 하기(단, toggle() 사용  x)
+			// 1-1 변수 이용
+			// var check = true;
+			// 1-2 count 이용
+			var count = 0;
+			$('#toggle').click(function(){
+				//count++;
+				//if(count % 2 != 0){
+					//$('#river').hide();
+				//}else{
+					//$('#river').show();
+				//}
+				
+			//	console.log($('#river').css('display'));
+				//if($('#river').css('display') != 'none'){
+					//$('#river').hide();
+				//}else{
+					//$('#river').show();
+			//	}
+				
+				$('#river').toggle(2000);
+			});
+			
+
+		});
+</script>
+
+	<h2>slideDown()와 slideUp()</h2>
+	<div class="menu">첫 번째 메뉴</div>
+	<p class="contents">내용1</p>
+	<div class="menu">두 번째 메뉴</div>
+	<p class="contents">내용2</p>
+	<div class="menu">세 번째 메뉴</div>
+	<p class="contents">내용3</p>
+	<div class="menu">네 번째 메뉴</div>
+	<p class="contents">내용4</p>
+	<div class="menu">다섯 번째 메뉴</div>
+	<p class="contents">내용5</p>
+	<script>
+		$(function(){
+			$('.menu').click(function(){
+			//	if($(this).next().css('display') == 'none'){
+				//	$(this).next().slideDown();
+				//}else{
+					//$(this).next().slideUp();
+				//}
+			
+				$(this).next().slideToggle();
+			});
+		});
+	</script>
+	
+	<h2>fadeIn()와 fadeOut()</h2>
+	<button id="fadeIn">fadeIn</button>
+	<button id="fadeOut">fadeOut</button>
+	<button id="fadeToggle">fadeToggle</button>
+	<br>
+	<img id="flower"src="../images/images/flower1.PNG" >
+	<script>
+		$(function(){
+			$('#fadeIn').click(function(){
+				$('#flower').fadeIn();
+			});
+			$('#fadeOut').click(function(){
+				$('#flower').fadeOut();
+			});
+			$('#fadeToggle').click(function(){
+				$('#flower').fadeToggle();
+			});
+			
+			$('#flower').hover(function(){
+				$(this).fadeTo(0,0.4);
+			}, function(){
+				$(this).fadeTo(700,1);
+			});
+			
+		});
+	</script>
+	
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</body>
+</html>
